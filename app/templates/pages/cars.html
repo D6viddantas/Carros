@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Cars List
+{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/cars_list.css'%}">
+
+{% endblock %}
+{% block content %}
+    <div class="main-form">
+    <form method='GET' class='searchform'action="{% url "cars_list" %}">
+        {% csrf_token %}
+        <input class="input-form" type='text' name="search" placeholder="Buscar carro..">
+        <button class="button-form" type="submit">Buscar</button>
+    </form>
+    </div>
+    <div class="main-cars-content">
+    {% for car in cars %}
+    {% include "partials/cars_card.html" %}
+    {% endfor %}
+    </div>
+{% endblock %}
